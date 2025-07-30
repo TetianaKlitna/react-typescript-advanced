@@ -1,16 +1,14 @@
 import { ComponentPropsWithoutRef } from 'react';
 
-type ButtonProps = {
-  el: 'button';
-} & ComponentPropsWithoutRef<'button'>;
+type ButtonProps = ComponentPropsWithoutRef<'button'> & { href?: never;};
+type LinkProps = ComponentPropsWithoutRef<'a'> & {href?: string};
 
-type LinkProps = {
-  el: 'link';
-} & ComponentPropsWithoutRef<'a'>;
+const isLinkProps   = (props: ButtonProps | LinkProps): props is LinkProps => {
+    return 'href' in props;
+}
 
 const Button = (props: ButtonProps | LinkProps) => {
-  const { el } = props;
-  if (el === 'link') {
+  if (isLinkProps(props)) {
     return <a {...props} className="button"></a>;
   }
   return <button {...props} className="button"></button>;
