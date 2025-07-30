@@ -6,9 +6,14 @@ import { useRef } from 'react';
 
 function App() {
   const ref = useRef<HTMLInputElement>(null);
+  const handleSave = (data: unknown) => {
+    console.log(data)
+    const extractedData = data as { name: string; age: string };
+    console.log(extractedData);
+  };
   return (
     <main>
-      <Form>
+      <Form onSave={handleSave}>
         <Input label="Name:" id="name" type="text" ref={ref} />
         <Input label="Age:" id="age" type="number" />
         <p>
