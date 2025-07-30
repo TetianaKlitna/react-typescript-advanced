@@ -1,8 +1,8 @@
-import Input from './components/Input';
-import Button from './components/Button';
-import Container from './components/Container';
+import Input from './components/UI/Input';
+import Button from './components/UI/Button';
+import Container from './components/UI/Container';
 //import Form from './components/Form';
-import FormImperative, { type FormHandle } from './components/FormImperative';
+import FormImperative, { type FormHandle } from './components/UI/FormImperative';
 import { useRef } from 'react';
 
 function App() {
