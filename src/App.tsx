@@ -1,25 +1,42 @@
 import Input from './components/Input';
 import Button from './components/Button';
 import Container from './components/Container';
-import Form from './components/Form';
+//import Form from './components/Form';
+import FormImperative, { type FormHandle } from './components/FormImperative';
 import { useRef } from 'react';
 
 function App() {
   const ref = useRef<HTMLInputElement>(null);
+  const customForm = useRef<FormHandle>(null);
   const handleSave = (data: unknown) => {
-    console.log(data)
-    const extractedData = data as { name: string; age: string };
-    console.log(extractedData);
+    // const extractedData = data as { name: string; age: string };
+    if (
+      !data ||
+      typeof data !== 'object' ||
+      !('name' in data) ||
+      !('age' in data)
+    ) {
+      return;
+    }
+    console.log(data);
+    customForm.current?.clear();
   };
   return (
     <main>
-      <Form onSave={handleSave}>
+      {/* <Form onSave={handleSave}>
         <Input label="Name:" id="name" type="text" ref={ref} />
         <Input label="Age:" id="age" type="number" />
         <p>
           <Button>Safe</Button>
         </p>
-      </Form>
+      </Form> */}
+      <FormImperative onSave={handleSave} ref={customForm}>
+        <Input label="Name:" id="name" type="text" ref={ref} />
+        <Input label="Age:" id="age" type="number" />
+        <p>
+          <Button>Safe</Button>
+        </p>
+      </FormImperative>
       <p>
         <Button href="https://google.com">A Link</Button>
       </p>
